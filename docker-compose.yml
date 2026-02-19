@@ -6,18 +6,19 @@ networks:
 services:
   uptime-kuma:
     image: louislam/uptime-kuma:1
+    restart: always
     volumes:
       - ./data/uptime-kuma/data:/app/data
-    restart: always
 
   caddy:
     image: caddybuilds/caddy-cloudflare:2.10.0
+    restart: always
     environment:
       - CLOUDFLARE_API_TOKEN
-    cap_add:
-      - NET_ADMIN
     ports:
       - 443:443
     volumes:
       - ./Caddyfile:/etc/caddy/Caddyfile
-    restart: always
+      - ./data/caddy:/data
+    cap_add:
+      - NET_ADMIN
