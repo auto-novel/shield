@@ -14,7 +14,7 @@ services:
     image: caddybuilds/caddy-cloudflare:2.10.0
     restart: always
     environment:
-      - CLOUDFLARE_API_TOKEN
+      - CLOUDFLARE_API_TOKEN=${CLOUDFLARE_API_TOKEN:?}
     ports:
       - 443:443
     volumes:
