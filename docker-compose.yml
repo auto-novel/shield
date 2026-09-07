@@ -11,14 +11,13 @@ services:
       - ./data/uptime-kuma/data:/app/data
 
   caddy:
-    image: caddybuilds/caddy-cloudflare:2.10.0
+    image: ghcr.io/auto-novel/shield:latest
     restart: always
     environment:
       - CLOUDFLARE_API_TOKEN=${CLOUDFLARE_API_TOKEN:?}
     ports:
       - 443:443
     volumes:
-      - ./Caddyfile:/etc/caddy/Caddyfile
       - ./data/caddy:/data
     cap_add:
       - NET_ADMIN
