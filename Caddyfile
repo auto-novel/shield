@@ -20,6 +20,10 @@ auth.novelia.cc {
         reverse_proxy core:4000
 }
 
+forum.novelia.cc {
+        reverse_proxy core:5000
+}
+
 n.novelia.cc {
         reverse_proxy core:80
 }
