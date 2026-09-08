@@ -57,8 +57,8 @@ case "$action" in
 		esac
 		duration_seconds=$((duration_value * duration_multiplier))
 		maintenance_end_epoch=$(($(date +%s) + duration_seconds))
-		maintenance_end=$(date -d "@$maintenance_end_epoch" "+%Y-%m-%d %H:%M %Z")
-		maintenance_end_iso=$(date -d "@$maintenance_end_epoch" "+%Y-%m-%dT%H:%M:%S%:z")
+		maintenance_end=$(TZ=Asia/Shanghai date -d "@$maintenance_end_epoch" "+%Y-%m-%d %H:%M UTC+08:00")
+		maintenance_end_iso=$(TZ=Asia/Shanghai date -d "@$maintenance_end_epoch" "+%Y-%m-%dT%H:%M:%S%:z")
 		;;
 	off|status)
 		shift

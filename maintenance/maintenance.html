@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="robots" content="noindex" />
+    <meta http-equiv="refresh" content="60" />
     <title>网站维护中</title>
     <style>
       :root {
@@ -42,6 +43,10 @@
         line-height: 1.8;
       }
 
+      p + p {
+        margin-top: 0.5rem;
+      }
+
       @media (prefers-color-scheme: dark) {
         body {
           color: #f2f4f7;
@@ -58,11 +63,52 @@
     <main>
       <h1>网站维护中</h1>
       <p>
-        我们正在进行系统维护，预计持续
-        <strong>{{MAINTENANCE_DURATION}}</strong>，于
-        <time datetime="{{MAINTENANCE_END_ISO}}">{{MAINTENANCE_END}}</time>
-        恢复。
+        预计剩余：<strong id="maintenance-countdown"
+          >{{MAINTENANCE_DURATION}}</strong
+        >
+      </p>
+      <p>
+        预计恢复：
+        <time id="maintenance-end" datetime="{{MAINTENANCE_END_ISO}}"
+          >{{MAINTENANCE_END}}</time
+        >
       </p>
     </main>
+    <script>
+      const countdown = document.querySelector("#maintenance-countdown");
+      const end = document.querySelector("#maintenance-end");
+      const endTime = new Date(end.dateTime).getTime();
+      let wasPending = false;
+
+      function updateCountdown() {
+        const remaining = endTime - Date.now();
+        if (!Number.isFinite(endTime)) {
+          countdown.textContent = "未知";
+          return;
+        }
+        if (remaining <= 0) {
+          countdown.textContent = "等待恢复";
+          if (wasPending) {
+            window.location.reload();
+          }
+          return;
+        }
+
+        wasPending = true;
+        const totalMinutes = Math.ceil(remaining / 60_000);
+        const days = Math.floor(totalMinutes / (24 * 60));
+        const hours = Math.floor((totalMinutes % (24 * 60)) / 60);
+        const minutes = totalMinutes % 60;
+        const parts = [];
+
+        if (days > 0) parts.push(`${days} 天`);
+        if (hours > 0) parts.push(`${hours} 小时`);
+        if (minutes > 0) parts.push(`${minutes} 分钟`);
+        countdown.textContent = parts.join(" ");
+      }
+
+      updateCountdown();
+      window.setInterval(updateCountdown, 10_000);
+    </script>
   </body>
 </html>
