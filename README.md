@@ -20,3 +20,18 @@ EOF
 # 3. 启动服务
 docker compose up -d
 ```
+
+## 维护模式
+
+`forum`、`auth` 和 `n` 的维护模式由宿主机 `data/maintenance` 目录下对应的 HTML 文件控制，无需重启或重新加载 Caddy。
+
+```bash
+./scripts/maintenance.sh on n
+./scripts/maintenance.sh on forum auth
+./scripts/maintenance.sh off forum auth
+./scripts/maintenance.sh status
+./scripts/maintenance.sh on
+./scripts/maintenance.sh off
+```
+
+未指定站点时默认操作全部站点。开启后，对应站点的页面请求会返回维护页面和 HTTP 503；关闭后立即恢复反向代理。
