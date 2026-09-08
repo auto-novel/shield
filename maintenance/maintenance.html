@@ -71,22 +71,56 @@
       <img src="/maintenance-girl.webp" />
       <h1>网站维护中</h1>
       <p>
-        预计剩余：<strong id="maintenance-countdown"
+        预计还需<strong id="maintenance-countdown"
           >{{MAINTENANCE_DURATION}}</strong
-        >
-      </p>
-      <p>
-        预计恢复：
-        <time id="maintenance-end" datetime="{{MAINTENANCE_END_ISO}}"
+        >，将于<time id="maintenance-end" datetime="{{MAINTENANCE_END_ISO}}"
           >{{MAINTENANCE_END}}</time
-        >
+        >恢复
       </p>
     </main>
     <script>
       const countdown = document.querySelector("#maintenance-countdown");
       const end = document.querySelector("#maintenance-end");
-      const endTime = new Date(end.dateTime).getTime();
+      const endDate = new Date(end.dateTime);
+      const endTime = endDate.getTime();
       let wasPending = false;
+
+      function localDayNumber(date) {
+        return Date.UTC(date.getFullYear(), date.getMonth(), date.getDate());
+      }
+
+      function formatEndTime() {
+        if (!Number.isFinite(endTime)) return;
+
+        const now = new Date();
+        const dayDifference =
+          (localDayNumber(endDate) - localDayNumber(now)) / 86_400_000;
+        const time = new Intl.DateTimeFormat("zh-CN", {
+          hour: "2-digit",
+          minute: "2-digit",
+          hourCycle: "h23",
+        }).format(endDate);
+
+        if (dayDifference === 0) {
+          end.textContent = `今天 ${time}`;
+          return;
+        }
+        if (dayDifference === 1) {
+          end.textContent = `明天 ${time}`;
+          return;
+        }
+
+        end.textContent = new Intl.DateTimeFormat("zh-CN", {
+          year:
+            endDate.getFullYear() === now.getFullYear() ? undefined : "numeric",
+          month: "long",
+          day: "numeric",
+          weekday: "short",
+          hour: "2-digit",
+          minute: "2-digit",
+          hourCycle: "h23",
+        }).format(endDate);
+      }
 
       function updateCountdown() {
         const remaining = endTime - Date.now();
@@ -115,6 +149,7 @@
         countdown.textContent = parts.join(" ");
       }
 
+      formatEndTime();
       updateCountdown();
       window.setInterval(updateCountdown, 10_000);
     </script>
