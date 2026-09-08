@@ -12,7 +12,6 @@
 		root * /srv/maintenance
 		rewrite * /{args[0]}.html
 		header Cache-Control "no-store"
-		header Retry-After "3600"
 		header X-Robots-Tag "noindex"
 		file_server {
 			status 503

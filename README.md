@@ -26,12 +26,12 @@ docker compose up -d
 `forum`、`auth` 和 `n` 的维护模式由宿主机 `data/maintenance` 目录下对应的 HTML 文件控制，无需重启或重新加载 Caddy。
 
 ```bash
-./scripts/maintenance.sh on n
-./scripts/maintenance.sh on forum auth
+./scripts/maintenance.sh on 30min n
+./scripts/maintenance.sh on 2h forum auth
+./scripts/maintenance.sh on 2h
 ./scripts/maintenance.sh off forum auth
 ./scripts/maintenance.sh status
-./scripts/maintenance.sh on
 ./scripts/maintenance.sh off
 ```
 
-未指定站点时默认操作全部站点。开启后，对应站点的页面请求会返回维护页面和 HTTP 503；关闭后立即恢复反向代理。
+维护时长支持小时（如 `2h`）和分钟（如 `30min`）；开启时未指定站点则默认操作全部站点。开启后，对应站点的页面请求会返回预计维护时长、预计恢复时间和 HTTP 503；关闭后立即恢复反向代理。
