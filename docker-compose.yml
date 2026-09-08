@@ -4,12 +4,6 @@ networks:
     driver: bridge
 
 services:
-  uptime-kuma:
-    image: louislam/uptime-kuma:1
-    restart: always
-    volumes:
-      - ./data/uptime-kuma/data:/app/data
-
   caddy:
     image: ghcr.io/auto-novel/shield:latest
     restart: always
