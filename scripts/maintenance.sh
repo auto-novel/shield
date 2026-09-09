@@ -5,7 +5,7 @@ set -eu
 script_dir=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
 project_dir=$(dirname -- "$script_dir")
 template="$project_dir/maintenance/maintenance.html"
-image="$project_dir/maintenance/girl.webp"
+image="$project_dir/maintenance/mascot.webp"
 runtime_dir="$project_dir/data/maintenance"
 
 usage() {
@@ -77,10 +77,10 @@ services=$(expand_services "$@") || usage
 case "$action" in
 	on)
 		mkdir -p "$runtime_dir"
-		temporary_image="$runtime_dir/.girl.webp.$$"
+		temporary_image="$runtime_dir/.mascot.webp.$$"
 		cp "$image" "$temporary_image"
 		chmod 0644 "$temporary_image"
-		mv "$temporary_image" "$runtime_dir/girl.webp"
+		mv "$temporary_image" "$runtime_dir/mascot.webp"
 		for service in $services; do
 			active_page="$runtime_dir/$service.html"
 			temporary_page="$runtime_dir/.$service.html.$$"

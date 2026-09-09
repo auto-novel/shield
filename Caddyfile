@@ -4,7 +4,7 @@
 
 (maintenance) {
 	@maintenance_image {
-		path /girl.webp /*/girl.webp
+		path /mascot.webp /*/mascot.webp
 		file {
 			root /srv/maintenance
 			try_files /{args[0]}.html
@@ -13,7 +13,7 @@
 
 	handle @maintenance_image {
 		root * /srv/maintenance
-		rewrite * /girl.webp
+		rewrite * /mascot.webp
 		file_server
 	}
 
