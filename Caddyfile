@@ -4,7 +4,7 @@
 
 (maintenance) {
 	@maintenance_image {
-		path /maintenance-girl.webp
+		path /girl.webp /*/girl.webp
 		file {
 			root /srv/maintenance
 			try_files /{args[0]}.html
