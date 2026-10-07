@@ -6,7 +6,7 @@ script_dir=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
 project_dir=$(dirname -- "$script_dir")
 template="$project_dir/maintenance/maintenance.html"
 image="$project_dir/maintenance/mascot.webp"
-runtime_dir="$project_dir/data/maintenance"
+runtime_dir="$project_dir/srv/maintenance"
 
 usage() {
 	echo "Usage: $0 on {<number>h|<number>min} [forum|auth|n]..." >&2

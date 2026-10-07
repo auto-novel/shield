@@ -1,3 +1,5 @@
 # Deploy
 data/
+srv/maintenance/*
+!srv/maintenance/.gitkeep
 .env

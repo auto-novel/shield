@@ -1,7 +1,6 @@
 # Shield 统一对外出口
 
 [![GPL-3.0](https://img.shields.io/github/license/auto-novel/shield)](https://github.com/auto-novel/shield#license)
-[![cd](https://github.com/auto-novel/shield/actions/workflows/cd.yml/badge.svg)](https://github.com/auto-novel/shield/actions/workflows/cd.yml)
 
 提供统一对外出口代理，并包含监控各项服务实时运行状态与可用性的仪表盘。
 
@@ -21,9 +20,19 @@ EOF
 docker compose up -d
 ```
 
+## 重载 Caddyfile
+
+`caddy/` 目录以只读方式挂载到容器内 `/etc/caddy`，改完配置后执行：
+
+```bash
+./scripts/reload.sh
+```
+
+脚本会先校验再重载：校验不通过就直接退出、不会重载；重载失败时 Caddy 会保留正在运行的旧配置并报错，不会中断线上。
+
 ## 维护模式
 
-`forum`、`auth` 和 `n` 的维护模式由宿主机 `data/maintenance` 目录下对应的 HTML 文件控制，无需重启或重新加载 Caddy。
+`forum`、`auth` 和 `n` 的维护模式由宿主机 `srv/maintenance` 目录下对应的 HTML 文件控制，无需重启或重新加载 Caddy。
 
 ```bash
 ./scripts/maintenance.sh on 30min n

@@ -5,7 +5,7 @@ networks:
 
 services:
   caddy:
-    image: ghcr.io/auto-novel/shield:latest
+    image: caddybuilds/caddy-cloudflare:2.10.0
     restart: always
     environment:
       - CLOUDFLARE_API_TOKEN=${CLOUDFLARE_API_TOKEN:?}
@@ -13,6 +13,7 @@ services:
       - 443:443
     volumes:
       - ./data/caddy:/data
-      - ./data/maintenance:/srv/maintenance:ro
+      - ./caddy:/etc/caddy:ro
+      - ./srv:/srv:ro
     cap_add:
       - NET_ADMIN
