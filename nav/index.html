@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Novelia 导航</title>
+  <style>
+    /* 默认深色；系统偏好浅色时由下方媒体查询覆盖，color-scheme 一并切换，
+       让滚动条等浏览器原生控件跟着主题走。 */
+    :root {
+      color-scheme: dark;
+      --bg: #161616;
+      --text: #f2f4f7;
+      --card-bg: #1d1d1d;
+      --card-border: #2e2e2e;
+      --card-bg-hover: #272727;
+      --card-border-hover: #4a4a4a;
+      --muted: #a3a3a3;
+      --arrow: #8a8a8a;
+
+      font-family:
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        "PingFang SC",
+        "Microsoft YaHei",
+        sans-serif;
+    }
+
+    @media (prefers-color-scheme: light) {
+      :root {
+        color-scheme: light;
+        --bg: #f2f4f7;
+        --text: #1b1b1f;
+        --card-bg: #ffffff;
+        --card-border: #dcdce2;
+        --card-bg-hover: #f7f7f9;
+        --card-border-hover: #c3c3cc;
+        --muted: #62626b;
+        --arrow: #8a8a93;
+      }
+    }
+
+    body {
+      display: grid;
+      min-height: 100vh;
+      margin: 0;
+      color: var(--text);
+      background: var(--bg);
+      place-items: center;
+    }
+
+    main {
+      width: min(32rem, calc(100% - 3rem));
+      padding-block: 2rem;
+      text-align: center;
+    }
+
+    img {
+      display: block;
+      width: min(12rem, 50vw);
+      height: auto;
+      margin: 0 auto 1.5rem;
+    }
+
+    h1 {
+      margin: 0 0 1.5rem;
+      font-size: clamp(2rem, 8vw, 3.5rem);
+      font-weight: 600;
+    }
+
+    ul {
+      display: grid;
+      gap: 0.75rem;
+      /* 比标题窄一些，链接更紧凑。 */
+      width: min(22rem, 100%);
+      margin: 0 auto;
+      padding: 0;
+      list-style: none;
+    }
+
+    a {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 1rem 1.25rem;
+      border: 1px solid var(--card-border);
+      border-radius: 0.75rem;
+      color: inherit;
+      background: var(--card-bg);
+      font-size: 1.1rem;
+      text-align: left;
+      text-decoration: none;
+      transition:
+        background-color 0.15s ease,
+        border-color 0.15s ease;
+    }
+
+    a:hover,
+    a:focus-visible {
+      border-color: var(--card-border-hover);
+      background: var(--card-bg-hover);
+    }
+
+    .label {
+      font-weight: 600;
+    }
+
+    .host {
+      color: var(--muted);
+    }
+
+    .arrow {
+      margin-left: auto;
+      color: var(--arrow);
+      font-weight: 400;
+      transition: transform 0.15s ease;
+    }
+
+    a:hover .arrow,
+    a:focus-visible .arrow {
+      transform: translateX(0.25rem);
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <img src="./mascot.webp" alt="" />
+    <h1>Novelia 导航</h1>
+    <ul>
+      <!-- 新增站点时，按下面两行的格式追加一个 <li> 即可。 -->
+      <li>
+        <a href="https://n.novelia.cc/"><span class="label">小说</span><span class="host">n.novelia.cc</span><span class="arrow">→</span></a>
+      </li>
+      <li>
+        <a href="https://forum.novelia.cc/"><span class="label">论坛</span><span class="host">forum.novelia.cc</span><span class="arrow">→</span></a>
+      </li>
+    </ul>
+  </main>
+</body>
+
+</html>

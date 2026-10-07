@@ -1,3 +1,5 @@
 **
 !Caddyfile
 !Dockerfile
+!nav
+!nav/**

@@ -9,6 +9,7 @@ on:
       - .dockerignore
       - Caddyfile
       - Dockerfile
+      - nav/**
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}

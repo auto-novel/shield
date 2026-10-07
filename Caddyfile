@@ -33,6 +33,13 @@
 	}
 }
 
+nav.novelia.cc {
+	handle {
+		root * /srv/nav
+		file_server
+	}
+}
+
 monitor.novelia.cc {
 	reverse_proxy core:3000
 }
