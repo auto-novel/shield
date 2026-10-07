@@ -123,6 +123,16 @@
     a:focus-visible .arrow {
       transform: translateX(0.25rem);
     }
+
+    .hint {
+      /* 桌面端一行放下，窄屏自动折行。 */
+      width: min(26rem, 100%);
+      margin: 1.25rem auto 0;
+      color: var(--muted);
+      font-size: 0.85rem;
+      line-height: 1.6;
+      text-wrap: balance;
+    }
   </style>
 </head>
 
@@ -139,6 +149,7 @@
         <a href="https://forum.novelia.cc/"><span class="label">论坛</span><span class="host">forum.novelia.cc</span><span class="arrow">→</span></a>
       </li>
     </ul>
+    <p class="hint">如果无法打开，刷新本页面或重启浏览器后重试。<br/>仍有问题请联系管理员。</p>
   </main>
 </body>
 
